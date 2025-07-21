@@ -1,0 +1,8 @@
+python-docx
+pdfminer
+pdfminer.six
+pdfminer.six[full]
+pdfminer.six[txt]
+PyMuPDF
+docx
+sentence-transformers
