@@ -39,3 +39,15 @@ def load_and_parse_documents(doc_paths):
         parsed_docs.append({"doc_id": doc_id, "text": text})
     return parsed_docs
 
+
+if __name__ == "__main__":
+    document_paths = ["A Study of Nigerian Youths' Underst.txt"] # or you can give your document here
+    parsed_docs = load_and_parse_documents(document_paths)
+
+    # Store in JSONL format
+    jsonl_path = os.path.join(DATA_DIR, "parsed_docs.jsonl")
+    write_parsed_docs(parsed_docs, jsonl_path)
+
+    # Convert to Pandas DataFrame
+    df = pd.DataFrame(parsed_docs)
+    print(df.head()['text'][0])
