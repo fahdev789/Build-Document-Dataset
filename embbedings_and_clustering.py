@@ -43,3 +43,46 @@ for i, chunk in enumerate(sampled_chunks):
     print(f"\n--- Cluster {chunk['cluster']} ---")
     print(chunk['text'])
 
+
+
+"""
+
+Here we will get the sentences that will represent the clusters.
+
+import re
+from nltk.tokenize import sent_tokenize
+
+
+clusters = {
+    0: sampled_chunks[0]['text'],
+    1: sampled_chunks[1]['text'],
+    2: sampled_chunks[2]['text'],
+    3: sampled_chunks[3]['text'],
+    4: sampled_chunks[0]['text']
+}
+
+# Define minimal filters (customize per context)
+KEYWORDS = [
+    "HIV", "CSR", "environment", "behavioral", "gamification",
+    "public health", "youth", "pollution", "regulation", "marketing"
+]
+
+def highlight_sentences_from_clusters(clusters, keywords, min_len=50):
+    highlights = {}
+    for cluster_id, text in clusters.items():
+        sentences = sent_tokenize(text)
+        filtered = [
+            sent.strip() for sent in sentences
+            if any(kw.lower() in sent.lower() for kw in keywords) and len(sent) > min_len
+        ]
+        highlights[cluster_id] = filtered
+    return highlights
+
+# Get highlights
+highlighted_sentences = highlight_sentences_from_clusters(clusters, KEYWORDS)
+
+# Display results
+for cluster_id, sentences in highlighted_sentences.items():
+    print(f"\n--- Cluster {cluster_id} ---")
+    for sent in sentences:
+        print(f"- {sent}")
